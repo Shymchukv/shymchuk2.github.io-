@@ -21,8 +21,22 @@ $(function() {
   $('a[href^="#"]').on('click', function(e) {
     e.preventDefault();
     const target = $(this).attr('href');
-    $('html, body').animate({
-      scrollTop: $(target).offset().top
-    }, 600); 
+    if ($(target).length) {
+      let targetOffset = $(target).offset().top - 70; 
+      $('html, body').animate({ scrollTop: targetOffset }, 600);
+    }
+  });
+
+  $("[data-scroll]").on("click", function(event) {
+    event.preventDefault();
+    let elementId = $(this).data('scroll');
+    console.log("Клікнули по:", elementId);
+
+    if ($(elementId).length) {
+      let elementOffset = $(elementId).offset().top - 70; 
+      $("html, body").animate({ scrollTop: elementOffset }, 600);
+    } else {
+      console.warn("Елемент не знайдено:", elementId);
+    }
   });
 });
